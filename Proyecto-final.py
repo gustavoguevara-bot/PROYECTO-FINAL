@@ -53,3 +53,5 @@ def mostrar_menu():
     print("7. Total ventas del dia")
     print("8. Salir")
 # Fin Parte Gustavo
+
+# Parte Rodrigo
