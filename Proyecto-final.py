@@ -94,3 +94,113 @@ def consultar_inventario():
         cantidad = inventario[nombre_producto][1]
         print(nombre_producto, "- Precio: $" + str(precio), "- Cantidad:", cantidad)
 # Fin parte de Rodrigo
+
+# Victor parte 
+def vender_producto():
+ nombre_producto = input("Nombre del producto a vender: ")
+
+if nombre_producto not in inventario:
+ print("Ese producto no existe")
+    return
+
+try:
+    cantidad_vendida = int(input("Cantodad a vender: "))
+except ValueError
+print("Debes escribir un numero entero")
+return
+
+cantidad_disponible = iventario[nombre_producto][1]
+
+if cantidad_vendida <= 0:
+    print("La Cantidad a Vender debe ser mayor 0.")
+elif cantidad_vendida > cantidad_disponible:
+print("No hay Suficiente Inventario. Solo quedan", cantidad_disponible, "unidades.")
+else:
+precio_unitario = inventario[nombre_producto][0]
+total_venta = precio_unitario * cantidad_vendida
+
+inventario[nombre_producto][1] = cantidad_disponible - cantidad_vendida
+
+venta = [nombre_producto, cantidad_vendida, precio_unitario,total_venta]
+ventas_del_dia.append(venta)
+
+print("Venta realizada.Total a cobrar: $" + str(total_venta))
+
+def buscar_producto():
+    nombre_producto = input("Nombre del Producto para buscar: ")
+
+if nombre_producto in inventario:
+           precio = inventario[nombre_producto][0]
+        cantidad = inventario[nombre_producto][1]
+        print("Producto encontrado -> Precio: $" + str(precio), "- Cantidad:", cantidad)
+    else:
+        print("El producto no se encuentra en el inventario.")
+
+
+def reporte_stock_bajo():
+    print("\n----- PRODUCTOS CON STOCK BAJO (5 o menos) -----")
+    hay_stock_bajo = False
+
+    for nombre_producto in inventario:
+        cantidad = inventario[nombre_producto][1]
+        if cantidad <= 5:
+            print(nombre_producto, "- Cantidad restante:", cantidad)
+            hay_stock_bajo = True
+
+    if hay_stock_bajo == False:
+        print("No hay productos con stock bajo por el momento.")
+
+
+def ver_ventas_del_dia():
+    if len(ventas_del_dia) == 0:
+        print("Todavia no se ha registrado ninguna venta hoy.")
+        return
+
+    print("\n----- VENTAS DEL DIA -----")
+    for venta in ventas_del_dia:
+        nombre_producto = venta[0]
+        cantidad_vendida = venta[1]
+        precio_unitario = venta[2]
+        total_venta = venta[3]
+        print(nombre_producto, "| Cantidad:", cantidad_vendida, "| Precio unitario: $" + str(precio_unitario), "| Total: $" + str(total_venta))
+
+
+def total_vendido_del_dia():
+    total = 0
+    for venta in ventas_del_dia:
+        total = total + venta[3]
+    print("El total vendido hoy es: $" + str(total))
+
+
+def main():
+    cargar_inventario()
+
+    programa_activo = True
+    while programa_activo == True:
+        mostrar_menu()
+        opcion = input("Elige una opcion: ")
+
+        if opcion == "1":
+            agregar_producto()
+        elif opcion == "2":
+            consultar_inventario()
+        elif opcion == "3":
+            vender_producto()
+        elif opcion == "4":
+            buscar_producto()
+        elif opcion == "5":
+            reporte_stock_bajo()
+        elif opcion == "6":
+            ver_ventas_del_dia()
+        elif opcion == "7":
+            total_vendido_del_dia()
+        elif opcion == "8":
+            guardar_inventario()
+            print("Gracias por usar el sistema. Hasta luego.")
+            programa_activo = False
+        else:
+            print("Opcion no valida, intenta de nuevo.")
+
+
+main()
+# Fin parte Victor
