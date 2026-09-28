@@ -58,79 +58,80 @@ def mostrar_menu():
 def agregar_producto():
     nombre_producto = input("Nombre del producto: ")
 
-precio_valido = False
-while precio_valido == False:
-    try:
-        precio_producto = float(input("Precio del producto:"))
-        if precio_producto > 0:
-            precio_valido = True
-        else:
-            print("El precio  debe ser mayor a 0.Intenta de nuevo")
-    except ValueError:
-        print("Debes escribir un numero valido para el precio")
+    precio_valido = False
+    while precio_valido == False:
+        try:
+            precio_producto = float(input("Precio del producto: "))
+            if precio_producto > 0:
+                precio_valido = True
+            else:
+                print("El precio debe ser mayor a 0. Intenta de nuevo")
+        except ValueError:
+            print("Debes escribir un numero valido para el precio")
 
-cantidad_valida = False
-while cantidad_valida == False
- try:
-     cantidad_producto = int(input("Cantidad en inventario:"))
-     if cantidad_producto >= 0:
-         cantidad_valida = True 
-     else:
-         print("La cantidad no puede ser negativa")
-except ValueError:
-    print("Debes escribir un numero entero valido para la cantidad")
+    cantidad_valida = False
+    while cantidad_valida == False:
+        try:
+            cantidad_producto = int(input("Cantidad en inventario: "))
+            if cantidad_producto >= 0:
+                cantidad_valida = True
+            else:
+                print("La cantidad no puede ser negativa")
+        except ValueError:
+            print("Debes escribir un numero entero valido para la cantidad")
 
-inventario[nombre_producto] = [precio_producto,cantidad_producto]
- print("Producto agregado correctamente")
+    inventario[nombre_producto] = [precio_producto, cantidad_producto]
+    print("Producto agregado correctamente")
 
 def consultar_inventario():
     if len(inventario) == 0:
         print("El inventario esta vacio.")
         return
 
-    print("\n----- INVENTARIO COMPLETO -----")
+    print("\n=== INVENTARIO COMPLETO ===")
     for nombre_producto in inventario:
-        precio = inventario[nombre_producto][0]
-        cantidad = inventario[nombre_producto][1]
+        precio      = inventario[nombre_producto][0]
+        cantidad    = inventario[nombre_producto][1]
         print(nombre_producto, "- Precio: $" + str(precio), "- Cantidad:", cantidad)
 # Fin parte de Rodrigo
 
 # Victor parte 
 def vender_producto():
- nombre_producto = input("Nombre del producto a vender: ")
+    nombre_producto = input("Nombre del producto a vender: ")
 
-if nombre_producto not in inventario:
- print("Ese producto no existe")
-    return
+    if nombre_producto not in inventario:
+        print("Ese producto no existe")
+        return
 
-try:
-    cantidad_vendida = int(input("Cantodad a vender: "))
-except ValueError
-print("Debes escribir un numero entero")
-return
+    try:
+        cantidad_vendida = int(input("Cantidad a vender: "))
+    except ValueError:
+        print("Debes escribir un numero entero")
+        return
 
-cantidad_disponible = iventario[nombre_producto][1]
+    cantidad_disponible = inventario[nombre_producto][1]
 
-if cantidad_vendida <= 0:
-    print("La Cantidad a Vender debe ser mayor 0.")
-elif cantidad_vendida > cantidad_disponible:
-print("No hay Suficiente Inventario. Solo quedan", cantidad_disponible, "unidades.")
-else:
-precio_unitario = inventario[nombre_producto][0]
-total_venta = precio_unitario * cantidad_vendida
+    if cantidad_vendida <= 0:
+        print("La cantidad a vender debe ser mayor a 0.")
+    elif cantidad_vendida > cantidad_disponible:
+        print("No hay suficiente inventario. Solo quedan", cantidad_disponible, "unidades.")
+    else:
+        precio_unitario = inventario[nombre_producto][0]
+        total_venta = precio_unitario * cantidad_vendida
 
-inventario[nombre_producto][1] = cantidad_disponible - cantidad_vendida
+        inventario[nombre_producto][1] = cantidad_disponible - cantidad_vendida
 
-venta = [nombre_producto, cantidad_vendida, precio_unitario,total_venta]
-ventas_del_dia.append(venta)
+        venta = [nombre_producto, cantidad_vendida, precio_unitario, total_venta]
+        ventas_del_dia.append(venta)
 
-print("Venta realizada.Total a cobrar: $" + str(total_venta))
+        print("Venta realizada. Total a cobrar: $" + str(total_venta))
+
 
 def buscar_producto():
-    nombre_producto = input("Nombre del Producto para buscar: ")
+    nombre_producto = input("Nombre del producto para buscar: ")
 
-if nombre_producto in inventario:
-           precio = inventario[nombre_producto][0]
+    if nombre_producto in inventario:
+        precio = inventario[nombre_producto][0]
         cantidad = inventario[nombre_producto][1]
         print("Producto encontrado -> Precio: $" + str(precio), "- Cantidad:", cantidad)
     else:
@@ -200,7 +201,6 @@ def main():
             programa_activo = False
         else:
             print("Opcion no valida, intenta de nuevo.")
-
-
+            
 main()
 # Fin parte Victor
